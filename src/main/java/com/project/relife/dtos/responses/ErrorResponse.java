@@ -1,6 +1,7 @@
 package com.project.relife.dtos.responses;
 
 
+import com.stripe.exception.StripeException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -17,6 +18,10 @@ public class ErrorResponse {
     private LocalDateTime timestamp;
     private String message;
     private String details;
+
+    public static ErrorResponse create(StripeException exception, WebRequest request) {
+        return new ErrorResponse(LocalDateTime.now(), exception.getMessage(), request.getDescription(false));
+    }
 
     public static ErrorResponse create(Exception exception, WebRequest request) {
         return new ErrorResponse(LocalDateTime.now(), exception.getMessage(), request.getDescription(false));
