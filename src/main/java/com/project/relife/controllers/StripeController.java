@@ -1,5 +1,6 @@
 package com.project.relife.controllers;
 
+import com.project.relife.dtos.PaymentIntentRecord;
 import com.project.relife.services.StripeService;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
@@ -22,7 +23,7 @@ public class StripeController {
     }
 
     @PostMapping("/intent")
-    public PaymentIntent createPaymentIntent(@RequestParam long amount, @RequestParam String currency) throws StripeException {
+    public ResponseEntity<PaymentIntentRecord> createPaymentIntent(@RequestParam long amount, @RequestParam String currency) throws StripeException {
         System.out.println("Creating payment intent with amount " + amount + " and currency " + currency);
         return stripeService.createPaymentIntent(amount, currency);
     }

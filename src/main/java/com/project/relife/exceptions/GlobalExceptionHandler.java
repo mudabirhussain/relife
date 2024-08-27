@@ -13,16 +13,17 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(StripeException.class)
     public ResponseEntity<ErrorResponse> handleStripeException(StripeException exc, WebRequest req) {
-        System.out.println("StripeException: " + exc);
-        System.out.println("StripeResponse: " + exc.getStripeError());
         return new ResponseEntity<>(ErrorResponse.create(exc,req), HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
+    @ExceptionHandler(MapperException.class)
+    public ResponseEntity<ErrorResponse> handleStripeException(MapperException exc, WebRequest req) {
+        return new ResponseEntity<>(ErrorResponse.create(exc,req), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     //Generic Exception Handler
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGlobalException(Exception exc, WebRequest req) {
-        System.out.println("StripeException: " + exc);
-        exc.printStackTrace();
         return new ResponseEntity<>(ErrorResponse.create(exc,req), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

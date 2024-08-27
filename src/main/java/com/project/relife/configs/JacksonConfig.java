@@ -3,7 +3,7 @@ package com.project.relife.configs;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.project.relife.dtos.PaymentIntentMixin;
+import com.project.relife.dtos.bindings.PaymentIntentMixin;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

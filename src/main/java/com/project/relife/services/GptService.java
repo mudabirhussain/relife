@@ -1,7 +1,7 @@
 package com.project.relife.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.relife.dtos.Message;
+import com.project.relife.dtos.innerDtos.Message;
 import com.project.relife.dtos.requests.GptRequest;
 import com.project.relife.dtos.responses.GptResponse;
 import org.springframework.stereotype.Service;

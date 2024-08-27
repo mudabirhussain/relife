@@ -1,6 +1,6 @@
 package com.project.relife.dtos.responses;
 
-import com.project.relife.dtos.Choice;
+import com.project.relife.dtos.innerDtos.Choice;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
 package com.project.relife.dtos.requests;
 
-import com.project.relife.dtos.Message;
+import com.project.relife.dtos.innerDtos.Message;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;

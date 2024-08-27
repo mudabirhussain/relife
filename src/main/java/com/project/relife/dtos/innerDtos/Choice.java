@@ -1,4 +1,4 @@
-package com.project.relife.dtos;
+package com.project.relife.dtos.innerDtos;
 
 import lombok.Data;
 import lombok.Getter;
