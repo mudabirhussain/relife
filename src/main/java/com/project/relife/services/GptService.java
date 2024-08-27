@@ -60,7 +60,7 @@ public class GptService {
     }
 
     public static String getApiKey() {
-        System.getenv().forEach((key, value) -> System.out.println(key + ": " + value));
+        //System.getenv().forEach((key, value) -> System.out.println(key + ": " + value));
 
         String apiKey = System.getenv("OPENAI_API_KEY");
 
