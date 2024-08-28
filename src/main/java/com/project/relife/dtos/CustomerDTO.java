@@ -1,12 +1,9 @@
 package com.project.relife.dtos;
 
 import com.project.relife.entities.CustomerEntity;
-import com.project.relife.exceptions.RelifeException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Objects;
 
 @Data
 @AllArgsConstructor
@@ -18,7 +15,7 @@ public class CustomerDTO {
     private String customerPhone;
     private String customerEmail;
 
-    public static CustomerDTO createDTO(CustomerEntity customerEntity) throws RelifeException {
+    public static CustomerDTO fromEntity(CustomerEntity customerEntity){
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setCustomerId(customerEntity.getCustomerId());
         customerDTO.setCustomerName(customerEntity.getCustomerName());

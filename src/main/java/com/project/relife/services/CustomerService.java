@@ -13,11 +13,11 @@ import java.util.Optional;
 public class CustomerService {
     private CustomerRepo customerRepo;
 
-    public CustomerDTO getCustomerById(CustomerDTO customerDTO) throws Exception {
+    public CustomerDTO getCustomerById(CustomerDTO customerDTO) throws RuntimeException {
         CustomerEntity customerEntity = customerRepo
                 .findById(customerDTO.getCustomerId())
-                .orElseThrow(() -> new Exception("Customer not found"));
-        return CustomerDTO.createDTO(customerEntity);
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+        return CustomerDTO.fromEntity(customerEntity);
     }
 
     public CustomerDTO createCustomer(CustomerDTO customerDTO) throws Exception {
@@ -26,6 +26,6 @@ public class CustomerService {
         if(customerEntityOptional.isPresent()){
             throw new Exception("Customer already exists");
         }
-        return CustomerDTO.createDTO(customerRepo.save(CustomerEntity.createEntity(customerDTO)));
+        return CustomerDTO.fromEntity(customerRepo.save(CustomerEntity.fromDTO(customerDTO)));
     }
 }

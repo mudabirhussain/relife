@@ -20,7 +20,7 @@ public class CustomerEntity {
     private String customerPhone;
     private String customerAddress;
 
-    public static CustomerEntity createEntity(CustomerDTO customerDTO) {
+    public static CustomerEntity fromDTO(CustomerDTO customerDTO) {
         CustomerEntity customerEntity = new CustomerEntity();
         customerEntity.setCustomerName(customerDTO.getCustomerName());
         customerEntity.setCustomerEmail(customerDTO.getCustomerEmail());

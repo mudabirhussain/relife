@@ -1,6 +1,8 @@
 package com.project.relife.controllers;
 
 import com.project.relife.dtos.PaymentIntentRecord;
+import com.project.relife.dtos.requests.CartRequest;
+import com.project.relife.services.CheckoutService;
 import com.project.relife.services.StripeService;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
@@ -12,20 +14,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/payments")
+@RequestMapping("/payment/stripe")
 public class StripeController {
 
     private StripeService stripeService;
     private String endpointSecret = "";
 
-    public StripeController(StripeService stripeService) {
+
+    public StripeController(StripeService stripeService, CheckoutService checkoutService) {
         this.stripeService = stripeService;
     }
 
     @PostMapping("/intent")
-    public ResponseEntity<PaymentIntentRecord> createPaymentIntent(@RequestParam long amount, @RequestParam String currency) throws StripeException {
-        System.out.println("Creating payment intent with amount " + amount + " and currency " + currency);
-        return stripeService.createPaymentIntent(amount, currency);
+    public ResponseEntity<PaymentIntentRecord> createPaymentIntent(@RequestBody CartRequest cartRequest) throws StripeException {
+        return stripeService.createPaymentIntent(cartRequest);
     }
 
     @PostMapping("/charge")
@@ -69,5 +71,10 @@ public class StripeController {
         }
 
         return ResponseEntity.ok("Webhook handled");
+    }
+
+    @PostMapping("/checkout/hosted")
+    public String hostedCheckout(@RequestBody CartRequest cartRequest) throws StripeException {
+        return stripeService.processHostedCheckoutUrl(cartRequest);
     }
 }
