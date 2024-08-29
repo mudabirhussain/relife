@@ -19,13 +19,15 @@ import org.springframework.stereotype.Indexed;
 @Data
 @Slf4j
 public class AIClientConfig {
+
+    @Value("${openai-api-key}")
+    private String apiKey;
+
     @Value("${openai-service.http-client.read-timeout}")
     private int readTimeout;
 
     @Value("${openai-service.http-client.connect-timeout}")
     private int connectTimeout;
-
-    private String apiKey;
 
     @Value("${openai-service.gpt-model}")
     private String model;
@@ -50,10 +52,6 @@ public class AIClientConfig {
 
     @Bean
     public RequestInterceptor apiKeyInterceptor() {
-        String apiKey = System.getenv("OPENAI_API_KEY");
-        if (apiKey == null || apiKey.isEmpty()) {
-            throw new RuntimeException("API key is not set. Please set the OPEN_API_KEY environment variable.");
-        }
         return request -> request.header("Authorization", "Bearer " + apiKey);
     }
 }

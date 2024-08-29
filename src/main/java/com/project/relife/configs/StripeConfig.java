@@ -2,19 +2,16 @@ package com.project.relife.configs;
 
 import com.stripe.Stripe;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class StripeConfig {
+    @Value("${stripe-api-key}")
+    private String stripeApiKey;
 
     @PostConstruct
     public void init() {
-        String apiKey = System.getenv("STRIPE_API_KEY");
-
-        if (apiKey == null || apiKey.isEmpty()) {
-            throw new IllegalStateException("API key is not set. Please set the STRIPE_API_KEY environment variable.");
-        }
-
-        Stripe.apiKey = apiKey;
+        Stripe.apiKey = stripeApiKey;
     }
 }
