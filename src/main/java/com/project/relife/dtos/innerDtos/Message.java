@@ -1,18 +1,12 @@
 package com.project.relife.dtos.innerDtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
-@Getter
-@Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Message {
     private String role;
     private String content;
-
-    public Message(String role, String content) {
-        this.role = role;
-        this.content = content;
-    }
+    private Object refusal;  // Adjust type based on actual usage
 }

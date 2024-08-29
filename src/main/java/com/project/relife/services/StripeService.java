@@ -37,18 +37,21 @@ public class StripeService {
     }
 
     public ResponseEntity<PaymentIntentRecord> createPaymentIntent(CartRequest cartRequest) throws StripeException {
-        Long calculatedPrice = calculateCart(cartRequest);
-        System.out.println("Calculated Price: "+calculatedPrice);
-        System.out.println("Client's Price: "+ cartRequest.getTotal());
-        if(!calculatedPrice.equals(cartRequest.getTotal())){
+        Long calculatedPriceTotal = calculateCart(cartRequest);
+
+        System.out.println(cartRequest.getTotal());
+        if(!calculatedPriceTotal.equals(cartRequest.getTotal())){
             throw new RuntimeException("Price Mismatch, Please Review");
         }
         if(!cartRequest.getCurrencyEnum().equals(CurrencyEnum.USD)){
             throw new RuntimeException("Only USD Currency Supported");
         }
+
+        Long priceCentsTotal = convertDollarToCents(calculatedPriceTotal);
+
         PaymentIntentCreateParams params =
                 PaymentIntentCreateParams.builder()
-                        .setAmount(calculatedPrice)
+                        .setAmount(priceCentsTotal)
                         .setCurrency(cartRequest.getCurrencyEnum().getCurrency())
                         .build();
 
@@ -77,6 +80,10 @@ public class StripeService {
         return session.getUrl();
     }
 
+    private Long convertDollarToCents(Long usdDollarPrice){
+        return usdDollarPrice*100;
+    }
+
     private Long calculateCart(CartRequest cartRequest) throws RuntimeException{
         long calculatedPrice = 0L;
 
@@ -85,7 +92,11 @@ public class StripeService {
             if(optionalPrice.isEmpty()){
                 throw new RuntimeException("Price for product with ID " + productReq.getProductId() + " is null.");
             }
-            calculatedPrice += optionalPrice.get();
+            Long productPriceTotal = optionalPrice.get();
+            if(productReq.getProductQuantity() > 0L){
+                productPriceTotal *= productReq.getProductQuantity();
+            }
+            calculatedPrice += productPriceTotal;
         }
         return calculatedPrice;
     }

@@ -1,16 +1,20 @@
 package com.project.relife.dtos.responses;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.project.relife.dtos.innerDtos.Choice;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import com.project.relife.dtos.innerDtos.Usage;
+import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Setter
 @Data
-public class GptResponse {
-    private List<Choice> choices;
+@JsonIgnoreProperties(ignoreUnknown = true)
 
+public class GptResponse {
+    private String id;
+    private String object;
+    private Long created;
+    private String model;
+    private List<Choice> choices;
+    private Usage usage;
 }

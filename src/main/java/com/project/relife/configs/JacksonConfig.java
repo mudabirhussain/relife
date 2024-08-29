@@ -13,7 +13,6 @@ public class JacksonConfig {
     public ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
         JavaTimeModule module = new JavaTimeModule();
-        // Customize date/time format if needed
         mapper.registerModule(module);
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         mapper.addMixIn(com.stripe.model.PaymentIntent.class, PaymentIntentMixin.class);

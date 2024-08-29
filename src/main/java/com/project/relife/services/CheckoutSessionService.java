@@ -6,15 +6,11 @@ import com.project.relife.dtos.requests.CartRequest;
 import com.project.relife.dtos.requests.ProductRequest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
-import com.stripe.model.CustomerCollection;
-import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.checkout.SessionCreateParams;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class CheckoutSessionService {
@@ -56,11 +52,11 @@ public class CheckoutSessionService {
 
     private SessionCreateParams.LineItem createLineItem(ProductRequest productRequest) throws RuntimeException{
 
-        //Checking Quantityy
+        //Checking Quantity
         Long productQuantity = productRequest.getProductQuantity();
-
-        //Validating Products: In future, we will add inventory Validation
+        //Validating Products: In future, we will add (inventory Validation
         ProductDTO productDTO = productService.getProductById(productRequest.getProductId());
+        Long productPriceCents = convertDollarToCents(productDTO.getProductPrice());
 
         //Setting Session Params for Products & Return
         return SessionCreateParams.LineItem.builder()
@@ -74,10 +70,12 @@ public class CheckoutSessionService {
                                                 .build()
                                 )
                                 .setCurrency(productDTO.getProductPriceCurrency())
-                                .setUnitAmountDecimal(BigDecimal.valueOf(productDTO.getProductPrice()))
+                                .setUnitAmountDecimal(BigDecimal.valueOf(productPriceCents))
                                 .build())
                 .build();
     }
 
-
+    private Long convertDollarToCents(Long usdDollarPrice){
+        return usdDollarPrice*100;
+    }
 }

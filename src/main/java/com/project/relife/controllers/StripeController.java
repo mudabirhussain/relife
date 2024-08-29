@@ -35,6 +35,7 @@ public class StripeController {
         return stripeService.createCharge(token, amount, currency, description).toJson();
     }
 
+    //Future function
     @PostMapping("/webhook")
     public ResponseEntity<String> handleStripeWebhook(@RequestBody String payload, @RequestHeader("Stripe-Signature") String sigHeader) {
         Event event;
