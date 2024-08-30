@@ -20,9 +20,9 @@ public class InventoryEntity {
     private Long inventoryId;
     private String inventoryName;
     private String inventoryDescription;
-    @JoinColumn(name="status")
+    @Column(name="status")
     private StatusEnum statusEnum;
-    private Double productPrice;
+    private Double productSellingPrice;
 
     @OneToOne
     @JoinColumn(name="product_id", nullable = false)
