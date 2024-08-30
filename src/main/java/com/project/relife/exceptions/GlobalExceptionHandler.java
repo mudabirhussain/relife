@@ -16,11 +16,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ErrorResponse.create(exc,req), HttpStatus.SERVICE_UNAVAILABLE);
     }
 
-    @ExceptionHandler(MapperException.class)
-    public ResponseEntity<ErrorResponse> handleStripeException(MapperException exc, WebRequest req) {
-        return new ResponseEntity<>(ErrorResponse.create(exc,req), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
     //Generic Exception Handler
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGlobalException(Exception exc, WebRequest req) {
