@@ -1,6 +1,6 @@
 package com.project.relife.services;
 
-import com.project.relife.dtos.responses.SellerDTO;
+import com.project.relife.dtos.SellerDTO;
 import com.project.relife.entities.SellerEntity;
 import com.project.relife.repositories.SellerRepo;
 import lombok.AllArgsConstructor;

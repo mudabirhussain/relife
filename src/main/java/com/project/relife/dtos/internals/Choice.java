@@ -1,10 +1,8 @@
-package com.project.relife.dtos.innerDtos;
+package com.project.relife.dtos.internals;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-
-import java.io.Serializable;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)

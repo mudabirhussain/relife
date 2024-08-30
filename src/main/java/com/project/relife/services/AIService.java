@@ -2,7 +2,7 @@ package com.project.relife.services;
 
 import com.project.relife.client.AIClient;
 import com.project.relife.configs.AIClientConfig;
-import com.project.relife.dtos.innerDtos.Message;
+import com.project.relife.dtos.internals.Message;
 import com.project.relife.dtos.requests.ChatRequest;
 import com.project.relife.dtos.requests.GptRequest;
 import com.project.relife.dtos.requests.TranscriptionRequest;

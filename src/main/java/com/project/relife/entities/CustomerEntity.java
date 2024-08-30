@@ -2,15 +2,16 @@ package com.project.relife.entities;
 
 import com.project.relife.dtos.CustomerDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.Objects;
 
 @Entity
 @Data
 @Table(name = "customers")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,12 +21,14 @@ public class CustomerEntity {
     private String customerPhone;
     private String customerAddress;
 
-    public static CustomerEntity fromDTO(CustomerDTO customerDTO) {
-        CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.setCustomerName(customerDTO.getCustomerName());
-        customerEntity.setCustomerEmail(customerDTO.getCustomerEmail());
-        customerEntity.setCustomerPhone(customerDTO.getCustomerPhone());
-        customerEntity.setCustomerAddress(customerDTO.getCustomerAddress());
-        return customerEntity;
+    public static CustomerEntity fromDTO(@NonNull CustomerDTO customerDTO) {
+        Objects.requireNonNull(customerDTO, "customerDTO cannot be null");
+        return CustomerEntity.builder()
+                .customerId(customerDTO.getCustomerId())
+                .customerName(customerDTO.getCustomerName())
+                .customerEmail(customerDTO.getCustomerEmail())
+                .customerPhone(customerDTO.getCustomerPhone())
+                .customerAddress(customerDTO.getCustomerAddress())
+                .build();
     }
 }

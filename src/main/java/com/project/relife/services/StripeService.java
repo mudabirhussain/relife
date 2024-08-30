@@ -1,10 +1,10 @@
 package com.project.relife.services;
 
-import com.project.relife.dtos.PaymentIntentRecord;
-import com.project.relife.dtos.mappers.MapperDTO;
 import com.project.relife.dtos.requests.CartRequest;
 import com.project.relife.dtos.requests.ProductRequest;
+import com.project.relife.dtos.responses.PaymentIntentResponse;
 import com.project.relife.enums.CurrencyEnum;
+import com.project.relife.services.internals.CheckoutSessionService;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import com.stripe.model.PaymentIntent;
@@ -12,7 +12,6 @@ import com.stripe.model.checkout.Session;
 import com.stripe.param.PaymentIntentCreateParams;
 import com.stripe.param.checkout.SessionCreateParams;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -22,21 +21,18 @@ import java.util.Optional;
 @Service
 public class StripeService {
 
-    private final MapperDTO mapperDTO;
-    private final ProductService productService;
-
     @Value("${client.base.url}")
     private String clientBaseUrl;
 
+    private final ProductService productService;
     private final CheckoutSessionService checkoutSessionService;
 
-    public StripeService(CheckoutSessionService checkoutSessionService, MapperDTO mapperDTO, ProductService productService){
-        this.mapperDTO = mapperDTO;
+    public StripeService(CheckoutSessionService checkoutSessionService, ProductService productService){
         this.checkoutSessionService = checkoutSessionService;
         this.productService = productService;
     }
 
-    public ResponseEntity<PaymentIntentRecord> createPaymentIntent(CartRequest cartRequest) throws StripeException {
+    public PaymentIntentResponse createPaymentIntent(CartRequest cartRequest) throws StripeException {
         Long calculatedPriceTotal = calculateCart(cartRequest);
 
         System.out.println(cartRequest.getTotal());
@@ -55,10 +51,7 @@ public class StripeService {
                         .setCurrency(cartRequest.getCurrencyEnum().getCurrency())
                         .build();
 
-        PaymentIntent paymentIntent  = PaymentIntent.create(params);
-        PaymentIntentRecord record = mapperDTO.paymentIntentToRecord(paymentIntent);
-
-        return ResponseEntity.ok(record);
+        return PaymentIntentResponse.from(PaymentIntent.create(params));
     }
 
     public Charge createCharge(String token, long amount, String currency, String description) throws StripeException {

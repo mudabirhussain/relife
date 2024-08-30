@@ -1,9 +1,9 @@
-package com.project.relife.dtos.responses;
+package com.project.relife.dtos;
 
 import com.project.relife.entities.SellerEntity;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 
 import java.util.Objects;
 
@@ -16,7 +16,8 @@ public class SellerDTO {
     private String sellerPhone;
     private String sellerEmail;
 
-    public static SellerDTO fromEntity(SellerEntity sellerEntity){
+    public static SellerDTO fromEntity(@NonNull SellerEntity sellerEntity){
+        Objects.requireNonNull(sellerEntity, "sellerEntity cannot be null");
         return SellerDTO.builder()
                 .sellerId(sellerEntity.getSellerId())
                 .sellerName(sellerEntity.getSellerName())

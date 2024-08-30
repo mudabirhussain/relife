@@ -1,13 +1,10 @@
 package com.project.relife.entities;
 
-import com.project.relife.dtos.responses.SellerDTO;
+import com.project.relife.dtos.SellerDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Builder
@@ -25,7 +22,8 @@ public class SellerEntity {
     private String sellerPhone;
     private String sellerAddress;
 
-    public static SellerEntity fromDTO(SellerDTO sellerDTO){
+    public static SellerEntity fromDTO(@NonNull SellerDTO sellerDTO){
+        Objects.requireNonNull(sellerDTO,"sellerDTO cannot be null");
         return SellerEntity.builder()
                 .sellerId(sellerDTO.getSellerId())
                 .sellerName(sellerDTO.getSellerName())

@@ -1,8 +1,8 @@
 package com.project.relife.dtos.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.project.relife.dtos.innerDtos.Choice;
-import com.project.relife.dtos.innerDtos.Usage;
+import com.project.relife.dtos.internals.Choice;
+import com.project.relife.dtos.internals.Usage;
 import lombok.*;
 
 import java.util.List;

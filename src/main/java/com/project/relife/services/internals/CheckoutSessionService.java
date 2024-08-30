@@ -1,9 +1,11 @@
-package com.project.relife.services;
+package com.project.relife.services.internals;
 
 import com.project.relife.dtos.CustomerDTO;
 import com.project.relife.dtos.ProductDTO;
 import com.project.relife.dtos.requests.CartRequest;
 import com.project.relife.dtos.requests.ProductRequest;
+import com.project.relife.services.CustomerService;
+import com.project.relife.services.ProductService;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.param.checkout.SessionCreateParams;

@@ -1,7 +1,7 @@
 package com.project.relife.dtos.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.project.relife.dtos.innerDtos.GeneratedImage;
+import com.project.relife.dtos.internals.GeneratedImage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

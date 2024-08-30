@@ -2,7 +2,7 @@ package com.project.relife.dtos.requests;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.project.relife.dtos.innerDtos.Message;
+import com.project.relife.dtos.internals.Message;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

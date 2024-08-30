@@ -1,7 +1,7 @@
 package com.project.relife.controllers;
 
-import com.project.relife.dtos.PaymentIntentRecord;
 import com.project.relife.dtos.requests.CartRequest;
+import com.project.relife.dtos.responses.PaymentIntentResponse;
 import com.project.relife.services.CheckoutService;
 import com.project.relife.services.StripeService;
 import com.stripe.exception.SignatureVerificationException;
@@ -26,8 +26,8 @@ public class StripeController {
     }
 
     @PostMapping("/intent")
-    public ResponseEntity<PaymentIntentRecord> createPaymentIntent(@RequestBody CartRequest cartRequest) throws StripeException {
-        return stripeService.createPaymentIntent(cartRequest);
+    public ResponseEntity<PaymentIntentResponse> createPaymentIntent(@RequestBody CartRequest cartRequest) throws StripeException {
+        return ResponseEntity.ok(stripeService.createPaymentIntent(cartRequest));
     }
 
     @PostMapping("/charge")

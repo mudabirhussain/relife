@@ -1,4 +1,4 @@
-package com.project.relife.dtos.bindings;
+package com.project.relife.dtos.internals;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties({"lastResponse", "rawJsonObject"})

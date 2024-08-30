@@ -3,6 +3,7 @@ package com.project.relife.services;
 import com.project.relife.dtos.ProductDTO;
 import com.project.relife.entities.ProductEntity;
 import com.project.relife.repositories.ProductRepo;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,12 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ProductService {
-    ProductRepo productRepo;
-
-    public ProductService(ProductRepo productRepo) {
-        this.productRepo = productRepo;
-    }
+    private ProductRepo productRepo;
 
     public ProductDTO getProductById(Long productId) throws RuntimeException{
         ProductEntity productEntity = productRepo

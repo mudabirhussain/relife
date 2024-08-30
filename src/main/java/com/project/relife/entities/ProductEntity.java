@@ -2,15 +2,16 @@ package com.project.relife.entities;
 
 import com.project.relife.dtos.ProductDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.Objects;
 
 @Entity
 @Table(name="products")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,15 +23,16 @@ public class ProductEntity {
     private String productCategory;
     private String productImageUrl;
 
-    public static ProductEntity fromDTO(ProductDTO productDTO) {
-        ProductEntity productEntity = new ProductEntity();
-        productEntity.setProductId(productDTO.getProductId());
-        productEntity.setProductName(productDTO.getProductName());
-        productEntity.setProductDescription(productDTO.getProductDescription());
-        productEntity.setProductCategory(productDTO.getProductCategory());
-        productEntity.setProductImageUrl(productDTO.getProductImageUrl());
-        productEntity.setProductPrice(productDTO.getProductPrice());
-        productEntity.setProductPriceCurrency(productDTO.getProductPriceCurrency());
-        return productEntity;
+    public static ProductEntity fromDTO(@NonNull ProductDTO productDTO) {
+        Objects.requireNonNull(productDTO, "productDTO cannot be null");
+        return ProductEntity.builder()
+                .productId(productDTO.getProductId())
+                .productName(productDTO.getProductName())
+                .productDescription(productDTO.getProductDescription())
+                .productCategory(productDTO.getProductCategory())
+                .productImageUrl(productDTO.getProductImageUrl())
+                .productPrice(productDTO.getProductPrice())
+                .productPriceCurrency(productDTO.getProductPriceCurrency())
+                .build();
     }
 }

@@ -1,4 +1,4 @@
-package com.project.relife.dtos.innerDtos;
+package com.project.relife.dtos.internals;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;

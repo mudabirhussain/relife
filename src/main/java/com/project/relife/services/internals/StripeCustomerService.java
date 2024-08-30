@@ -1,4 +1,4 @@
-package com.project.relife.services;
+package com.project.relife.services.internals;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
